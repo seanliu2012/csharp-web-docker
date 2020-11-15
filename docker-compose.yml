@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  unit-tests:
+    image: mcr.microsoft.com/dotnet/core/sdk:3.1
+    command: dotnet test ./app/tests/Example.Service.UnitTests
+    volumes:
+      - .:/app
+
+  component-tests:
+    build:
+      context: .
+      dockerfile: ./tests/Example.Service.ComponentTests/Dockerfile
+    network_mode: "host"
+    volumes:
+      - .:/app
+    depends_on:
+      - run-app
+
+  run-app:
+    build:
+      context: .
+    ports:
+      - "5000:5000"

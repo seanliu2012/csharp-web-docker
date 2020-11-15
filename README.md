@@ -20,8 +20,15 @@ dotnet run -p src/Example.Service
 dotnet test
 ```
 
-## Run just component tests
+## Run component tests locally
 
 ```sh
 ls -d ../*/tests/*.ComponentTests/ | xargs -n 1 dotnet test
+```
+
+## Run component tests via docker containers
+
+```sh
+docker-compose run component-tests
+docker-compose down
 ```
