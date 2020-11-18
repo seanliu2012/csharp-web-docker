@@ -11,5 +11,5 @@ RUN dotnet restore
 
 # copy everything else and start test
 COPY . ./
-WORKDIR /app/tests/Example.Service.UnitTests
-RUN dotnet test
+
+CMD [ "dotnet", "test", "./tests/Example.Service.UnitTests/" ]

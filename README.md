@@ -29,6 +29,5 @@ ls -d ../*/tests/*.ComponentTests/ | xargs -n 1 dotnet test
 ## Run component tests via docker containers
 
 ```sh
-docker-compose run component-tests
-docker-compose down
+docker-compose run --rm component-tests
 ```

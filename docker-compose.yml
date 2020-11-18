@@ -7,6 +7,11 @@ services:
     volumes:
       - .:/app
 
+  unit-tests-2:
+    build:
+      context: .
+      dockerfile: ./tests/Example.Service.UnitTests/Dockerfile
+
   component-tests:
     build:
       context: .
