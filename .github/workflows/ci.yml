@@ -1,4 +1,4 @@
-name: Auto-build
+name: Build and test
 
 on:
   push:
@@ -20,5 +20,12 @@ jobs:
         run: dotnet restore
       - name: Build
         run: dotnet build --no-restore
-      - name: Test
+      - name: Run unit tests
         run: dotnet test ./tests/Example.Service.UnitTests --no-build --verbosity normal
+      - name: Prepare for integration tests
+        run: docker-compose up -d run-app
+      - name: Wait for 5 seconds
+        run: sleep 5s
+        shell: bash
+      - name: Run integration tests
+        run: docker-compose run --rm component-tests
