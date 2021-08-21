@@ -28,6 +28,10 @@ jobs:
       - name: Run unit tests
         run: dotnet test ./tests/Example.Service.UnitTests --no-build --verbosity normal
 
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+
       - name: Prepare for integration tests
         run: docker-compose up -d run-app
 
@@ -37,3 +41,6 @@ jobs:
 
       - name: Run integration tests
         run: docker-compose run --rm component-tests
+
+      - name: Post integration tests
+        run: docker-compose down
